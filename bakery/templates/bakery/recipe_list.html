@@ -1,0 +1,25 @@
+{% extends 'bakery/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% for recipe in recipes %}
+          <div class="col-sm-3">
+  							<div class="block">
+  								<button type="submit" class="heart" onClick="liked('{%pk=recipe.pk name='heart' + pk return name%}')"><span class="glyphicon glyphicon-heart heart-img" id="{%pk=recipe.pk name='heart' + pk return name%}"></span></button>
+  								<div class="rating">
+  									<button type="submit" class="star" id='1002a' onClick="userRated('1002', 1)"><span class="glyphicon glyphicon-star" id='star1002a'></span></button>
+  									<button type="submit" class="star" id='1002b' onClick="userRated('1002', 2)"><span class="glyphicon glyphicon-star" id='star1002b'></span></button>
+  									<button type="submit" class="star" id='1002c' onClick="userRated('1002', 3)"><span class="glyphicon glyphicon-star" id='star1002c'></span></button>
+  									<button type="submit" class="star" id='1002d' onClick="userRated('1002', 4)"><span class="glyphicon glyphicon-star" id='star1002d'></span></button>
+  									<button type="submit" class="star" id='1002e' onClick="userRated('1002', 5)"><span class="glyphicon glyphicon-star" id='star1002e'></span></button>
+  								</div>
+  								<a class="block-a" href="{% url 'recipe_detail' pk=recipe.pk %}">
+  									<img class="block-img img-rounded" src="{{recipe.imageDir}}" />
+  									<h4>{{recipe.title}}</h4>
+  									<p class="block-text">{{recipe.caption}}</p>
+                    {{recipe.bakeType}}
+  								</a>
+  							</div>
+  						</div>
+      {% endfor %}
+{% endblock %}

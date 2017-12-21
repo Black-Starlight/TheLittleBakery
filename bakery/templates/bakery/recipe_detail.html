@@ -1,0 +1,143 @@
+{% extends 'bakery/base.html' %}
+
+{% block content %}
+<div class="row" id="row">
+      <div class="col-sm-4">
+        <img class="img-rounded recipeImg" src="{{recipe.imageDir}}" />
+      </div>
+      <div class="col-sm-8 info">
+        <h1>{{recipe.title}}</h1>
+        <h4>{{caption}}</h4>
+        <table>
+          <tbody>
+            <tr>
+              <td class="tab">Serves</td>
+              <td><span class="label label-default">{{recipe.serve}}</span></td>
+
+            </tr>
+            <tr>
+              <td class="tab">Preperation time</td>
+              <td><span class="label label-default">{{recipe.prepTime}}</span></td>
+            </tr>
+            <tr>
+              <td class="tab">Cooking time</td>
+              <td><span class="label label-default">{{recipe.cookTime}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <p>Nutrition per serving:</p>
+         <table class="table">
+          <thead>
+            <tr>
+            <th>kCal</th>
+            <th>Fat</th>
+            <th>carbs</th>
+            <th>sugar</th>
+            <th>protein</th>
+            <th>salt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <td>{{recipe.kcal}}</td>
+            <td>{{recipe.fat}}</td>
+            <td>{{recipe.carbs}}</td>
+            <td>{{recipe.sugar}}</td>
+            <td>{{recipe.protein}}</td>
+            <td>{{recipe.salt}}</td>
+            </tr>
+          </tbody>
+          </table>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 line"></div>
+    </div>
+     <div class="row">
+      <div class="col-sm-4" id="ingredients">
+          <h4>ingredients</h3>
+
+            {{recipe.ingredients | linebreaksbr}}
+
+      </div>
+      <div class="col-sm-8 recipe">
+        <h4>Recipe</h4>
+        {{recipe.recipe | linebreaksbr}}
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 line2"></div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12">
+            <br />
+            <a id="buttonC" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Add comment</a>
+            <br />
+            {% for comment in recipe.comments.all %}
+              <div class="media">
+									<div class="media-body">
+									  <h4 class="media-heading">{{comment.name}} <small><i>{{comment.created_date}}</i></small></h4>
+										 <div class="rating2">
+
+                       {% with comment.pk|stringformat:"s" as id %}
+                         {% with id|add:'a' as a_id %}
+                           {% with 'star'|add:a_id as star_a_id %}
+                             <button name="{{star_a_id}}" type="submit" class="star starRVW" id='{{a_id}}' onClick="userRated('{{comment.pk}}', 1)">
+                                 <span class="glyphicon glyphicon-star" id='{{star_a_id}}'></span>
+                             </button>
+                           {% endwith %}
+                         {% endwith %}
+                       {% endwith %}
+                       {% with comment.pk|stringformat:"s" as id %}
+                         {% with id|add:'b' as b_id %}
+                           {% with 'star'|add:b_id as star_b_id %}
+                             <button name="{{star_b_id}}" type="submit" class="star starRVW" id='{{b_id}}' onClick="userRated('{{comment.pk}}', 2)">
+                                 <span class="glyphicon glyphicon-star" id='{{star_b_id}}'></span>
+                             </button>
+                           {% endwith %}
+                         {% endwith %}
+                       {% endwith %}
+                       {% with comment.pk|stringformat:"s" as id %}
+                         {% with id|add:'c' as c_id %}
+                           {% with 'star'|add:c_id as star_c_id %}
+                            <button name="{{star_c_id}}" type="submit" class="star starRVW" id='{{c_id}}' onClick="userRated('{{comment.pk}}', 3)">
+                                 <span class="glyphicon glyphicon-star" id='{{star_c_id}}'></span>
+                             </button>
+                           {% endwith %}
+                         {% endwith %}
+                       {% endwith %}
+                       {% with comment.pk|stringformat:"s" as id %}
+                         {% with id|add:'d' as d_id %}
+                           {% with 'star'|add:d_id as star_d_id %}
+                             <button name="{{star_d_id}}" type="submit" class="star starRVW" id='{{d_id}}' onClick="userRated('{{comment.pk}}', 4)">
+                                 <span class="glyphicon glyphicon-star" id='{{star_d_id}}'></span>
+                             </button>
+                           {% endwith %}
+                         {% endwith %}
+                       {% endwith %}
+                       {% with comment.pk|stringformat:"s" as id %}
+                         {% with id|add:'e' as e_id %}
+                           {% with 'star'|add:e_id as star_e_id %}
+                             <button name="{{star_e_id}}" type="submit" class="star starRVW" id='{{e_id}}' onClick="userRated('{{comment.pk}}', 5)">
+                                 <span class="glyphicon glyphicon-star" id='{{star_e_id}}'></span>
+                             </button>
+                           {% endwith %}
+                         {% endwith %}
+                       {% endwith %}
+                       <script>
+  												reviewed('{{comment.pk}}', {{comment.rate}});
+  											</script>
+  										</div>
+  									  <p>{{comment.text|linebreaks}}</p>
+  									 </div>
+  								</div>
+                  {% empty %}
+                      <p>No comments here yet :(</p>
+                {% endfor %}
+            </div>
+          </div>
+
+
+{% endblock %}

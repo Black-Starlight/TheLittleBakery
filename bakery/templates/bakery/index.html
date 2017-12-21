@@ -1,0 +1,107 @@
+{% extends 'bakery/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="text-block">
+							<h1>Welcome to The Little Bakery,</h1>
+							<p>
+								Here you can find all your favorite bake good recipes.
+								You can build your own cookbook by favoriting your favorite recipes, and add your own recipes for others to enjoy.
+								You can comment, leave ratings and make a grociery list with ease.
+							</p>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="block">
+							<a class="block-a" href="{% url 'cakes_cupcakes' %}">
+								<img class="block-img img-rounded" src="{% static 'img/cakes.jpg' %}" />
+								<p class="block-text">Find your cake and cupcakes recipes here.</p>
+								</a>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="block">
+							<a class="block-a" href="{% url 'pies' %}">
+								<img class="block-img img-rounded" src="{% static 'img/pies.jpeg' %}" />
+								<p class="block-text">Click here to find your pie recipes.</p>
+							</a>
+						</div>
+				</div>
+
+					<div class="col-sm-3">
+						<div class="block">
+							<a class="block-a" href="{% url 'cookies' %}">
+								<img class="block-img img-rounded" src="{% static 'img/cookie.jpg' %}" />
+								<p class="block-text">Click here to find your cookies recipes.</p>
+							</a>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="block">
+							<a class="block-a" href="{% url 'baked-goods' %}">
+								<img class="block-img img-rounded" src="{% static 'img/baked-goods.jpg' %}" />
+								<p class="block-text">Find your other baked good recipes here.</p>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- log in field-->
+				<div class="modal fade" id="login" role="dialog">
+					<div class="modal-dialog modal-sm">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <button type="button" class="close" data-dismiss="modal">&times;</button>
+						  <h4 class="modal-title">Log in</h4>
+						</div>
+						<div class="modal-body">
+							<form>
+								  <div class="form-group">
+									<label for="user">Username</label>
+									<input type="username" class="form-control" name="user" required>
+								  </div>
+								  <div class="form-group">
+									<label for="pwd">Password</label>
+									<input type="password" class="form-control" name="pwd" required>
+								  </div>
+								  <div class="checkbox">
+									<label><input type="checkbox">Remember me</label>
+								  </div>
+								  <button type="submit" class="button" onClick="login(this.form)">Log in</button>
+							</form>
+						</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <!-- sign in field-->
+				<div class="modal fade" id="signin" role="dialog">
+					<div class="modal-dialog modal-sm">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <button type="button" class="close" data-dismiss="modal">&times;</button>
+						  <h4 class="modal-title">Sign in</h4>
+						</div>
+						<div class="modal-body">
+							<form>
+								  <div class="form-group">
+									<label for="email">Email address</label>
+									<input type="email" class="form-control" id="email" required>
+								  </div>
+								  <div class="form-group">
+									<label for="pwd">Password</label>
+									<input type="password" class="form-control" id="pwd" required>
+								  </div>
+								  <div class="checkbox">
+									<label><input type="checkbox">Remember me</label>
+								  </div>
+								  <button type="submit" class="button" onClick="alert('you can't sign in at the moment')">sign in</button>
+							</form>
+						</div>
+					  </div>
+					</div>
+				  </div>
+					<a href="{% url 'recipe_list'%}">Click here</a>
+					
+{% endblock%}

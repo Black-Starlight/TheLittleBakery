@@ -1,0 +1,88 @@
+{% extends 'bakery/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% for recipe in recipes %}
+        <div class="col-sm-3">
+							<div class="block">
+                  {% with recipe.pk|stringformat:"s" as id %}
+                    {% with "heart"|add:id as heart_id %}
+                            <button name="{{heart_id}}" type="submit" class="heart" onClick="liked('{{heart_id}}')">
+                              <span class="glyphicon glyphicon-heart heart-img" id='{{heart_id}}'></span>
+                            </button>
+                    {% endwith %}
+                {% endwith %}
+                  <div class="rating">
+                    {% with recipe.pk|stringformat:"s" as id %}
+                      {% with id|add:'a' as a_id %}
+                        {% with 'star'|add:a_id as star_a_id %}
+        									<button name="{{star_a_id}}" type="submit" class="star" id='{{a_id}}' onClick="userRated('{{recipe.pk}}', 1)">
+                              <span class="glyphicon glyphicon-star" id='{{star_a_id}}'></span>
+                          </button>
+                        {% endwith %}
+                      {% endwith %}
+                    {% endwith %}
+                    {% with recipe.pk|stringformat:"s" as id %}
+                      {% with id|add:'b' as b_id %}
+                        {% with 'star'|add:b_id as star_b_id %}
+                          <button type="submit" name="{{star_b_id}}" class="star" id='{{b_id}}' onClick="userRated('{{recipe.pk}}', 2)">
+                              <span class="glyphicon glyphicon-star" id='{{star_b_id}}'></span>
+                          </button>
+                        {% endwith %}
+                      {% endwith %}
+                    {% endwith %}
+                    {% with recipe.pk|stringformat:"s" as id %}
+                      {% with id|add:'c' as c_id %}
+                        {% with 'star'|add:c_id as star_c_id %}
+                          <button type="submit" name="{{star_c_id}}" class="star" id='{{c_id}}' onClick="userRated('{{recipe.pk}}', 3)">
+                              <span class="glyphicon glyphicon-star" id='{{star_c_id}}'></span>
+                          </button>
+                        {% endwith %}
+                      {% endwith %}
+                    {% endwith %}
+                    {% with recipe.pk|stringformat:"s" as id %}
+                      {% with id|add:'d' as d_id %}
+                        {% with 'star'|add:d_id as star_d_id %}
+                          <button type="submit" name="{{star_d_id}}" class="star" id='{{d_id}}' onClick="userRated('{{recipe.pk}}', 4)">
+                              <span class="glyphicon glyphicon-star" id='{{star_d_id}}'></span>
+                          </button>
+                        {% endwith %}
+                      {% endwith %}
+                    {% endwith %}
+                    {% with recipe.pk|stringformat:"s" as id %}
+                      {% with id|add:'e' as e_id %}
+                        {% with 'star'|add:e_id as star_e_id %}
+                          <button type="submit" name="{{star_e_id}}" class="star" id='{{e_id}}' onClick="userRated('{{recipe.pk}}', 5)">
+                              <span class="glyphicon glyphicon-star" id='{{star_e_id}}'></span>
+                          </button>
+                        {% endwith %}
+                      {% endwith %}
+                    {% endwith %}
+                  </div>
+  								<a class="block-a" href="{% url 'recipe_detail' pk=recipe.pk %}">
+  									<img class="block-img img-rounded" src="{{recipe.imageDir}}" />
+  									<h4>{{recipe.title}}</h4>
+  									<p class="block-text">{{recipe.caption}}</p>
+  								</a>
+  							</div>
+  						</div>
+              <script>
+                  rated('{{recipe.pk}}', {{recipe.rating}});
+                //  var x = document.cookie;
+
+                var c_name = "pk" + {{recipe.pk}}
+
+                var x = getCookie(c_name);
+                if(x != ""){
+                  userRated('{{recipe.pk}}', x);
+                }
+
+                name = "heart" + {{recipe.pk}};
+                var x = getCookie(name);
+                if(x != ""){
+                  liked(name);
+                }
+
+              </script>
+    {% endfor %}
+{% endblock %}

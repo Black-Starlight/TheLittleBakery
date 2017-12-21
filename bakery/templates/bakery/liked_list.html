@@ -1,0 +1,33 @@
+{% extends 'bakery/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    {% for recipe in recipes %}
+
+    <div id="b{{recipe.pk}}">
+
+    </div>
+
+
+          <script>
+
+            name = "heart" + {{recipe.pk}};
+            var x = getCookie(name);
+
+            if(x != ""){
+              var b = 'b' + {{recipe.pk}}
+              console.log(x + " " + {{recipe.pk}} );
+              document.getElementById(b).innerHTML =  '<div class="col-sm-3"><div class="block">' +
+              '<a class="block-a" href="{% url 'recipe_detail' pk=recipe.pk %}">' +
+              '<img class="block-img img-rounded" src="{{recipe.imageDir}}" />' +
+              '<h4>{{recipe.title}}</h4>' +
+               '<p class="block-text">{{recipe.caption}} </p>'
+               '</a>' +
+               '</div></div>';
+            }
+
+          </script>
+    {% endfor %}
+
+{% endblock %}
