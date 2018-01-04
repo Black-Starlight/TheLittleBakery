@@ -62,7 +62,7 @@ class Comment(models.Model):
 class NewUsers(models.Model):
    author = models.CharField(max_length=200)
    email = models.CharField(max_length=200)
-   password = models.CharField(max_length=50, min_length=6)
+   password = models.CharField(max_length=50)
 
    def approve(self):
         self.save()
