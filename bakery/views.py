@@ -18,7 +18,7 @@ class recipeList(APIView):
     def post(self):
         pass
 
- class UserFormView(View):
+ class registration_form(View):
     form_class = UserForm
     template_name = 'bakery/registration_form.html'
     
