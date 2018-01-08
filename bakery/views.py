@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django,contrib.auth import authenticate, login
 from django.utils import timezone
+from django.viewsgeneric import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Recipes
 from .serializers import RecipeSerializer
-from .forms import CommentForm
+from .forms import CommentForm, UserForm
 
 class recipeList(APIView):
     def get(self, request):
@@ -16,6 +18,40 @@ class recipeList(APIView):
     def post(self):
         pass
 
+ class UserFormView(View):
+    form_class = UserForm
+    template_name = 'bakery/registration_form.html'
+    
+    # display blank form
+    def get(self, request):
+        form = selfform_class(None)
+        return render(request, self.template_name, {"form": form})
+    
+    def post(self, request):
+        form = self.form_class(request.POST)
+        
+        if form.is_valid():
+            
+            user = form.save(commit=False)
+            
+            #cleaned/normalized data
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+            
+            # returs User objects if credentials are correct
+            user = authenticate(username=username, password=password)
+            
+            if user is not none:
+                
+                if user.is_active:
+                    
+                    login(request, user)
+                    return redirect('bakery:index')
+                    
+        return reder(request, selftemplate_name, {'form': form})
+    
 def add_comment_to_recipe(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
     if request.method == "POST":
@@ -66,3 +102,4 @@ def recipe_list(request):
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
     return render(request, 'bakery/recipe_detail.html', {'recipe': recipe})
+
