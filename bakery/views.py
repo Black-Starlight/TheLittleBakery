@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Recipes
 from .serializers import RecipeSerializer
-from .forms import CommentForm, UserForm
+from .forms import CommentForm
 
 class recipeList(APIView):
     def get(self, request):
