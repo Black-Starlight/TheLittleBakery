@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django,contrib.auth import authenticate, login
 from django.utils import timezone
 from django.viewsgeneric import View
 from rest_framework.views import APIView
