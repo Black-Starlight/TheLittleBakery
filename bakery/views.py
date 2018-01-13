@@ -10,6 +10,7 @@ from django.views.generic import ListView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.renderers import TemplateHTMLRenderer
 
 from .models import Recipes, Comment, Profile
 from .serializers import RecipeSerializer
