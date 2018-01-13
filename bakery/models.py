@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import validate_comma_separated_integer_list
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Recipes(models.Model):
@@ -34,26 +38,32 @@ class Recipes(models.Model):
 
     def __str__(self):
         return self.title
- 
+
 class Comment(models.Model):
-    Ratings = [
-            ('0', '0'),
-            ('1', '1'),
-            ('2', '2'),
-            ('3', '3'),
-            ('4', '4'),
-            ('5', '5'),
-            ]
-    recipe = models.ForeignKey('bakery.Recipes', related_name='comments')
-    name = models.CharField(max_length=200)
-    text = models.TextField()
-    rate = models.CharField(max_length=1, choices=Ratings, default="0")
-    created_date = models.DateTimeField(default=timezone.now)
-    approved_comment = models.BooleanField(default=False)
+    content = models.TextField(default='empty')
+    date = models.DateTimeField(default=timezone.now)
+    path = models.CharField(validators=[validate_comma_separated_integer_list], blank=True, editable=False, max_length=50)
+    depth = models.PositiveSmallIntegerField(default=0)
 
-    def approve(self):
-        self.approved_comment = True
-        self.save()
+    def __unicode__(self):
+        return self.content
 
-    def __str__(self):
-        return self.text
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    favs = models.ForeignKey(Recipes, related_name='%(class)s_favorites', on_delete=models.CASCADE, blank=True, null=True)
+    made = models.ForeignKey(Recipes, related_name='%(class)s_made', on_delete=models.CASCADE, blank=True, null=True)
+    friends = models.ForeignKey(User, related_name='%(class)s_friends', on_delete=models.CASCADE, blank=True, null=True)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

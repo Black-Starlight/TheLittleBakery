@@ -1,4 +1,5 @@
-{% extends 'bakery/base.html' %}
+{% extends 'bakery/base.php' %}
+{% load humanize %}
 
 {% block content %}
 <div class="row" id="row">
@@ -70,18 +71,34 @@
       <div class="row">
         <div class="col-sm-12 line2"></div>
       </div>
-      <div class="row">
+
+<div class="row">
           <div class="col-sm-12">
             <br />
-            <a id="buttonC" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Add comment</a>
-            <br />
-            {% for comment in recipe.comments.all %}
-              <div class="media">
-									<div class="media-body">
-									  <h4 class="media-heading">{{comment.name}} <small><i>{{comment.created_date}}</i></small></h4>
-										 <div class="rating2">
 
-                       {% with comment.pk|stringformat:"s" as id %}
+                <br />
+                  <h1>Comments</h1>
+
+                       <ul id="commenters">
+                       {% for c in comment_tree %}
+                           <li id="{{c.id}}" class="c" style="margin-left:{{c.depth|add:c.depth}}em;">
+                               <p class="poster">Anonymous - {{c.date | naturaltime }}</p>
+                               <p>{{c.content}}</p>
+                               <p><a href="" class="reply">reply</a></p>
+                           </li>
+                       {% empty %}
+                           <li>There are currently no comments. You can be first!</li>
+                       {% endfor %}
+                     </ul>
+
+                           <!--
+                             <a id="buttonC" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Add comment</a>
+                               {% for comment in recipe.comments.all %}
+                                 <div class="media">
+                                     <div class="media-body">
+                                       <h4 class="media-heading">{{comment.name}} <small><i>{{comment.created_date}}</i></small></h4>
+                                        <div class="rating2"> -->
+                      <!-- {% with comment.pk|stringformat:"s" as id %}
                          {% with id|add:'a' as a_id %}
                            {% with 'star'|add:a_id as star_a_id %}
                              <button name="{{star_a_id}}" type="submit" class="star starRVW" id='{{a_id}}' onClick="userRated('{{comment.pk}}', 1)">
@@ -135,9 +152,10 @@
   								</div>
                   {% empty %}
                       <p>No comments here yet :(</p>
-                {% endfor %}
+                {% endfor %} -->
             </div>
           </div>
+
 
 
 {% endblock %}

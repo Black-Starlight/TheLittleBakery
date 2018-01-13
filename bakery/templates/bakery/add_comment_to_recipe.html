@@ -1,9 +1,10 @@
-{% extends 'bakery/base.html' %}
+{% extends 'bakery/base.php' %}
 
 {% block content %}
     <h1>New comment</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
+    <form id="postcomment" method="post">
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Send</button>
+        <p><input type="submit" value="Submit" /></p>
+        {% csrf_token %}
     </form>
 {% endblock %}
