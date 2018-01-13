@@ -79,9 +79,9 @@ var RecipeViewModel = function () {
                 recipe: self.newRecipe(),
 
             }
-            $.post("http://127.0.0.1:8000/recipes/", recipe)
+            $.post("http://starpower.pythonanywhere.com/recipes/", recipe)
                 .then(function (data) {
-                    window.location.replace("/post/" + data.pk)
+                    window.location.replace("/recipes/" + data.pk)
                 })
                 .fail(function (data) {
                     console.error(data);
