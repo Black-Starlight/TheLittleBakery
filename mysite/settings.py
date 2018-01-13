@@ -39,11 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'django.contrib.humanize',
     'rest_framework',
-=======
->>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f
     'bakery',
 ]
 
