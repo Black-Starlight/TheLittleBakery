@@ -13,7 +13,7 @@ from rest_framework import status
 
 from .models import Recipes, Comment, Profile
 from .serializers import RecipeSerializer
-from .forms import CommentForm, UserForm
+from .forms import CommentForm, UserForm, addRecipeForm
 
 
 
@@ -179,3 +179,6 @@ def update_profile(request):
         'profile_form': profile_form
     })
 
+def add_recipe(request):
+    form = addRecipeForm()
+    return render(request, 'bakery/add_recipe.html', {'form': form})
