@@ -59,6 +59,15 @@
             {% block content %}
             {% endblock %}
         </div>
-
+        <div>
+            {% block add_recipe %} 
+            {% endblock %}
+        </div>
+        
+        <!-- Knockout -->
+        <script src="{% static 'javascript/knockout-3.4.2.js' %}"></script>
+        <!-- JavaScript to add recipe -->
+        <script src="{% static 'javascript/add_recipe.js' %}"></script>
+        <!-- stylesheet -->
     </body>
 </html>
