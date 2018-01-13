@@ -54,6 +54,7 @@
                 <li><a href="{% url 'cookies'%}">Cookies</a></li>
                 <li><a href="{% url 'baked-goods'%}">Other Baked goods</a></li>
                 <li><a href="{% url 'liked_list'%}">Liked recipes</a></li>
+		<li><a href="{% url 'add_recipe'%}">Submit you own recipe</a></li>
               </ul>
               <form class="navbar-form navbar-left" action="">
                  <div class="input-group">
@@ -82,6 +83,10 @@
             {% block content %}
             {% endblock %}
         </div>
+	<div>
+    	{% block add_recipe %}
+	{% endblock %}
+  	</div>
         <!-- log in field-->
         <!--
 				<div class="modal fade" id="login" role="dialog">
@@ -139,5 +144,10 @@
 					  </div>
 					</div>
         </div> -->
+	    <!-- Knockout -->
+        <script src="{% static 'javascript/knockout-3.4.2.js' %}"></script>
+        <!-- JavaScript to add recipe -->
+        <script src="{% static 'javascript/add_recipe.js' %}"></script>
+        <!-- stylesheet -->
     </body>
 </html>
