@@ -48,7 +48,6 @@ class Comment(models.Model):
     def __unicode__(self):
         return self.content
 
-<<<<<<< HEAD
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -68,9 +67,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-=======
+
     def __str__(self):
         return self.text
 
     
->>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f
