@@ -27,7 +27,7 @@ class recipeList(APIView):
     def post(self):
         pass
 
-<<<<<<< HEAD
+
 class UserFormView(View):
     form_class = UserForm
     template_name = 'bakery/registration_form.html'
@@ -41,7 +41,7 @@ class UserFormView(View):
     def post(self, request):
         form = self.form_class(request.POST)
 
-=======
+
     
 def add_comment_to_recipe(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
