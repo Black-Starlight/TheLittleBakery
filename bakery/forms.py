@@ -32,9 +32,9 @@ class CommentForm(forms.ModelForm):
         fields = ['content']
 
     
-    class Meta:
-        model = Comment
-        fields = ('name', 'rate', 'text')
+   # class Meta:
+    #    model = Comment
+     #   fields = ('name', 'rate', 'text')
         
 
 
