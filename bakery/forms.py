@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.models import User
 from .models import Comment, Profile
@@ -21,11 +22,19 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['bio', 'location', 'birth_date']
 
-
 class CommentForm(forms.ModelForm):
+<<<<<<< HEAD
     #Hidden value to get a child's parent
     parent = forms.CharField(max_length = 50, widget=forms.HiddenInput(attrs={'class': 'parent'}), required=False)
 
     class Meta:
         model = Comment
         fields = ['content']
+=======
+    
+    class Meta:
+        model = Comment
+        fields = ('name', 'rate', 'text')
+        
+
+>>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f

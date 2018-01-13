@@ -27,6 +27,7 @@ class recipeList(APIView):
     def post(self):
         pass
 
+<<<<<<< HEAD
 class UserFormView(View):
     form_class = UserForm
     template_name = 'bakery/registration_form.html'
@@ -40,6 +41,13 @@ class UserFormView(View):
     def post(self, request):
         form = self.form_class(request.POST)
 
+=======
+    
+def add_comment_to_recipe(request, pk):
+    recipe = get_object_or_404(Recipes, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+>>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f
         if form.is_valid():
             user = form.save(commit=False)
 
@@ -143,6 +151,7 @@ def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
     return render(request, 'bakery/recipe_detail.html', {'recipe': recipe})
 
+<<<<<<< HEAD
 def login_page(request):
     recipes = Recipes.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'bakery/registration/login.html', {'recipes': recipes})
@@ -171,3 +180,5 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+=======
+>>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f

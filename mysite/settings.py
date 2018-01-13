@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,14 +32,18 @@ ALLOWED_HOSTS = ['127.0.0.1', 'starpower.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'django.contrib.humanize',
     'rest_framework',
+=======
+>>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f
     'bakery',
 ]
 
