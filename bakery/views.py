@@ -160,6 +160,10 @@ def profiles(request):
     profile = Profile
     return render(request, 'bakery/registration/profile.html', {'profile': profile})
 
+def add_recipe(request):
+    form = addRecipeForm()
+    return render(request, 'bakery/add_recipe.html', {'form': form})
+
 
 def update_profile(request):
     if request.method == 'POST':
@@ -180,6 +184,4 @@ def update_profile(request):
         'profile_form': profile_form
     })
 
-def add_recipe(request):
-    form = addRecipeForm()
-    return render(request, 'bakery/add_recipe.html', {'form': form})
+
