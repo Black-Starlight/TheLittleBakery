@@ -81,7 +81,7 @@ var RecipeViewModel = function () {
             }
             $.post("http://starpower.pythonanywhere.com/recipes/", recipe)
                 .then(function (data) {
-                    window.location.replace("/post/" + data.pk)
+                    window.location.replace("/recipe/" + data.pk)
                 })
                 .fail(function (data) {
                     console.error(data);
