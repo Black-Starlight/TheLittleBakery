@@ -12,16 +12,13 @@ from django.utils.translation import gettext as _
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.renderers import TemplateHTMLRenderer
+from django.utils.translation import gettext as _
 
 from .models import Recipes, Comment, Profile, ProfileComments
 from django.contrib.auth.models import User
 from .serializers import RecipeSerializer
-from .forms import CommentForm, UserForm, ProfileForm, ProfileCommentsForm
-
-
-
-
-
+from .forms import CommentForm, UserForm, addRecipeForm, ProfileForm, ProfileCommentsForm
 
 
 
@@ -32,8 +29,12 @@ class recipeList(APIView):
         serializer = RecipeSerializer(recipes, many=True)
         return Response(serializer.data)
 
-    def post(self):
-        pass
+    def post(self, request):
+        serializer = RecipeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserFormView(View):
@@ -129,6 +130,11 @@ def users(request):
     return render(request, 'bakery/users.html', {'users': users, 'profile': Profile})
 
 
+def users(request):
+    users = User.objects.all()
+    return render(request, 'bakery/users.html', {'users': users, 'profile': Profile})
+
+
 def cakes(request):
     recipes = Recipes.objects.filter(bakeType = 'CAKES').order_by('created_date')
 
@@ -166,6 +172,12 @@ def recipe_detail(request, pk):
 def login_page(request):
     recipes = Recipes.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'bakery/registration/login.html', {'recipes': recipes, 'profile': Profile})
+
+
+def add_recipe(request):
+    form = addRecipeForm()
+    return render(request, 'bakery/add_recipe.html', {'form': form})
+
 
 
 

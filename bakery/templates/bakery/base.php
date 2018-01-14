@@ -58,6 +58,7 @@
                 {%else%}
                   <li><a href="{% url 'liked_list'%}">Liked recipes</a></li>
                 {% endif %}
+                  <li><a href="{% url 'add_recipe'%}">Submit you own recipe</a></li>
               </ul>
               <form class="navbar-form navbar-left" action="">
                  <div class="input-group">
@@ -88,7 +89,11 @@
 
             {% block content %}
             {% endblock %}
-
+            <!-- Knockout -->
+            <script src="{% static 'javascript/knockout-3.4.2.js' %}"></script>
+            <!-- JavaScript to add recipe -->
+            <script src="{% static 'javascript/add_recipe.js' %}"></script>
+            <!-- stylesheet -->
         </div>
 
     </body>

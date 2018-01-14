@@ -44,7 +44,11 @@
                 <li><a href="{% url 'cookies'%}">Cookies</a></li>
                 <li><a href="{% url 'baked-goods'%}">Other Baked goods</a></li>
                 <li><a href="{% url 'liked_list'%}">Liked recipes</a></li>
+<<<<<<< HEAD
 
+=======
+                <li><a href="{% url 'add_recipe'%}">Submit you own recipe</a></li>
+>>>>>>> bcb3b048269a66676ededa159c23127b74cafbec
               </ul>
                 <!--
               <ul class="nav navbar-nav navbar-right">
@@ -60,6 +64,15 @@
             {% block content %}
             {% endblock %}
         </div>
-
+        <div>
+            {% block add_recipe %} 
+            {% endblock %}
+        </div>
+        
+        <!-- Knockout -->
+        <script src="{% static 'javascript/knockout-3.4.2.js' %}"></script>
+        <!-- JavaScript to add recipe -->
+        <script src="{% static 'javascript/add_recipe.js' %}"></script>
+        <!-- stylesheet -->
     </body>
 </html>

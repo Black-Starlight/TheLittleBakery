@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.models import User
-from .models import Comment, Profile, ProfileComments
+from .models import Comment, Profile, ProfileComments, Recipes
 
 #class CommentForm(forms.ModelForm):
 
@@ -29,6 +29,17 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+
+
+   # class Meta:
+    #    model = Comment
+     #   fields = ('name', 'rate', 'text')
+
+class addRecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipes
+        fields = ('title','caption','imageDir','bakeType','serve','prepTime','cookTime','kcal','fat','carbs','sugar','protein','salt','ingredients','recipe')
+
 
 class ProfileCommentsForm(forms.ModelForm):
 
