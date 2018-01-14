@@ -79,7 +79,7 @@ var RecipeViewModel = function () {
                 recipe: self.newRecipe(),
 
             }
-            $.post("http://starpower.pythonanywhere.com/recipes/", recipe)
+            $.post("http://starpower.pythonanywhere.com/recipes/", recipe())
                 .then(function (data) {
                     window.location.replace("/recipe/" + data.pk)
                 })
