@@ -33,13 +33,10 @@ urlpatterns = [
     url(r'^profile/(?P<username>[a-zA-Z0-9]+)/favorite$', views.favorite, name='favorite'),
 
     url(r'^<(?P<pk>\d+)$', views.liked, name='liked'),
-<<<<<<< HEAD
+
     url(r'^recipe/(?P<pk>\d+)/comment/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),
-    url(r'^users$', views.users, name='users'),
-=======
     url(r'^users$', views.users, name='users'),
     
     #'''url(r'^add_comment_to_recipe/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),''' 
     
->>>>>>> bcb3b048269a66676ededa159c23127b74cafbec
 ]
