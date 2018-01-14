@@ -1,0 +1,9 @@
+{% extends 'bakery/base.php' %}
+{% load staticfiles %}
+
+{% block content %}
+    {%for u in users%}
+      <a href="{% url 'userProfile' u.username%}">{{u.username}}</a> 
+    {%endfor%}
+
+{% endblock %}
