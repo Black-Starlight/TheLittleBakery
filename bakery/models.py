@@ -10,7 +10,7 @@ class Recipes(models.Model):
     bakeChoices = (('CAKES', 'cakes & cupcakes'),
      ('PIES', 'pies'), ('COOKIES', 'cookies'), ('OTHER', 'other'))
 
-    title= models.CharField(max_length=30)
+    title= models.CharField(max_length=17)
     imageDir = models.CharField(max_length=100)
     caption = models.CharField(max_length=40)
     text = models.TextField(max_length=200, default="")
@@ -48,17 +48,15 @@ class Comment(models.Model):
     def __unicode__(self):
         return self.content
 
-<<<<<<< HEAD
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    favs = models.ForeignKey(Recipes, related_name='%(class)s_favorites', on_delete=models.CASCADE, blank=True, null=True)
-    made = models.ForeignKey(Recipes, related_name='%(class)s_made', on_delete=models.CASCADE, blank=True, null=True)
-    friends = models.ForeignKey(User, related_name='%(class)s_friends', on_delete=models.CASCADE, blank=True, null=True)
-
+    favs = models.ManyToManyField(Recipes, related_name='%(class)s_favorites', blank=True )
+    made = models.ManyToManyField(Recipes, related_name='%(class)s_made', blank=True )
+    friends = models.ManyToManyField(User, related_name='%(class)s_friends',  blank=True)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -68,9 +66,20 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-=======
     def __str__(self):
         return self.text
 
-    
->>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f
+
+class ProfileComments(models.Model):
+    profile = models.ForeignKey('Profile', related_name='comments')
+    commenter = models.ForeignKey(User, related_name='commenter')
+    comment = models.TextField(max_length=200)
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.comment

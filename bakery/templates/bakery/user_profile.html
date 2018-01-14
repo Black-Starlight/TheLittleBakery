@@ -1,0 +1,94 @@
+{% extends 'bakery/base.php' %}
+{% load staticfiles %}
+
+{% block content %}
+<h1>{{user.username}}
+    {% if user.is_authenticated and user.name is request.user.username %}
+    <span class="edit">
+        <a href="{% url 'profile-edit' user.username %}"><span class="glyphicon glyphicon-pencil"></span>edit profile</a>
+    </span>
+    {% else %}
+
+        <button type="submit" class="save btn btn-default">add as friend</button>
+    
+    {% endif %}
+  </h1>
+  <small>{{user.profile.location}}</small>
+  <small>{{user.profile.birth_date}}</small>
+  <hr>
+  <p>{{user.profile.bio}}</p>
+  <hr>
+  <div class="col-md-12 friends">
+    <h3>Friends</h3>
+      {% for friend in user.profile.friends.all|slice:":4" %}
+        <a class="friends-a" href="{% url 'userProfile' friend.username %}">{{ friend.username }}</a>
+        <br>
+      {%endfor%}
+      <a class="profile-but" href="{% url 'friends' user.username %}">See more</a>
+  </div>
+  <div class="col-md-6 profile-box profile-block-left">
+  <h3>Made recipes</h3>
+  {% for r in user.profile.made.all|slice:":4" %}
+    <div class="col-md-5 block" style="margin-right: 10px">
+      <a class="block-a" href="{% url 'recipe_detail' pk=r.pk %}">
+        <img class="block-img img-rounded" src="../{{r.imageDir}}" />
+        <h4>{{r.title}}</h4>
+      </a>
+    </div>
+  {% endfor %}
+  <a class="profile-but" href="{% url 'made' user.username %}">see more</a>
+</div>
+<div class="col-md-6 profile-box profile-block-right">
+  <h3>Liked Recipes</h3>
+  {% for fav in user.profile.favs.all|slice:":4" %}
+    <div class="col-md-5 block" style="margin-right: 10px">
+      <a class="block-a" href="{% url 'recipe_detail' pk=fav.pk %}">
+        <img class="block-img img-rounded" src="../{{fav.imageDir}}" />
+        <h4>{{fav.title}}</h4>
+      </a>
+    </div>
+  {% endfor %}
+  <a class="profile-but" href="{% url 'favorite' user.username %}">see more</a>
+</div>
+<div class="panel-group col-md-12" id="accordion" style="margin-top: 30px">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Comments</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+          {% if user.is_authenticated and user.username != request.user.username %}
+          <h1>Add comment</h1>
+          <form method="POST" class="post-form">{% csrf_token %}
+              {{ comments_form.as_p }}
+              <button type="submit" class="save btn btn-default">Send</button>
+          </form>
+          {% endif %}
+
+              {% for comment in user.profile.comments.all %}
+                <div class="media">
+                    <div class="media-body">
+                      <h4 class="media-heading"><a href="{% url 'userProfile' comment.commenter%}">{{comment.commenter}}</a> <small><i>{{comment.created_date}}</i></small></h4>
+
+     <p>{{comment.comment|linebreaks}}</p>
+    </div>
+ </div>
+ {% empty %}
+     <p>No comments here yet :(</p>
+{% endfor %}
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}
+<p>You aren't logged in at the moment. <a href="{% url 'login_page'%}">Log in</a> or <a href="{% url 'registration_form'%}">sign in</a> to see your profile</p>

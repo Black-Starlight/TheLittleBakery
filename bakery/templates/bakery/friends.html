@@ -1,0 +1,8 @@
+{% extends 'bakery/base.php' %}
+{% block content %}
+  <h3>Friends</h3>
+  {% for friend in user.profile.friends.all|slice:":4" %}
+    <a class="friends-a" href="{% url 'userProfile' friend.username %}">{{ friend.username }}</a>
+  {% endfor %}
+  <br>
+{% endblock %}

@@ -32,18 +32,14 @@ ALLOWED_HOSTS = ['127.0.0.1', 'starpower.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'django.contrib.humanize',
     'rest_framework',
-=======
->>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f
     'bakery',
 ]
 

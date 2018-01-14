@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'bakery/base.php' %}
 
 {% block content %}
@@ -6,7 +5,7 @@
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Sign up</button>
-=======
+
 {% extends 'bakery/base.html' %}
 
 {% block content %}
@@ -14,6 +13,5 @@
     <form method="POST" class="UserForm">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Send</button>
->>>>>>> 76a0deaa4f795b2038d14214df758e8d41eb9f8f
     </form>
 {% endblock %}

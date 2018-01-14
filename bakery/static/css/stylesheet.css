@@ -141,11 +141,39 @@ body{
 	padding: 3px;
 }
 
+.profile-box{
+	margin: 0px;
+	border: 1px solid sienna;
+}
+
+.profile-block-left{
+	margin-left: -50px;
+	margin-right: 100px;
+}
+
+.profile-block-right{
+	margin-right: -50px;
+}
+
 @media screen and (max-width: 500px) {
     .banner-text{
 		font-size: 40px;
 
 }
+
+		.profile-box{
+			margin: 0px;
+		}
+
+		.profile-block-left{
+			margin: 0px;
+		}
+
+		.profile-block-right{
+			margin: 0px;
+		}
+
+
 }
 
 @media screen and (max-width: 450px) {
@@ -255,4 +283,28 @@ select, textarea{
 
 .tab{
 	padding-right: 30px;
+}
+
+.friends-a{
+	display: inline-block;
+	border: 1px solid grey;
+	width: 100px;
+}
+
+.profile-but{
+	background-color: 	#00b3b3;
+	border: none;
+	width: 100px;
+	margin: 10px auto 10px auto;
+	cursor: pointer;
+	text-decoration: none;
+	color: white;
+	display: inline-block;
+	text-align: center;
+	padding: 5px;
+}
+
+.edit{
+	font-size: 15px;
+	float: right;
 }
