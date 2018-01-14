@@ -37,7 +37,6 @@ class CommentForm(forms.ModelForm):
      #   fields = ('name', 'rate', 'text')
         
 class addRecipeForm(forms.ModelForm):
-
     class Meta:
         model = Recipes
         fields = ('title','caption','imageDir','bakeType','serve','prepTime','cookTime','kcal','fat','carbs','sugar','protein','salt','ingredients','recipe')
