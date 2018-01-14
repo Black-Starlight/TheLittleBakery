@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^cookies$', views.cookies, name='cookies'),
     url(r'^baked-goods$', views.bakedGoods, name='baked-goods'),
     url(r'^liked_list$', views.liked_list, name='liked_list'),
+    url(r'^add_recipe$', views.add_recipe, name='add_recipe'), 
 
     url(r'^recipe/(?P<pk>\d+)/$', views.recipe_detail, name='recipe_detail'),
     url(r'^recipes/', views.recipeList.as_view()),
@@ -24,7 +25,5 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 
 
-    url(r'^recipe/(?P<pk>\d+)/comment/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),
-
-    url(r'^add_recipe/$', views.add_recipe, name='add_recipe'),    
+    url(r'^recipe/(?P<pk>\d+)/comment/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),   
 ]
