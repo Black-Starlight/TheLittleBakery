@@ -14,7 +14,7 @@
   									<button type="submit" class="star" id='1002e' onClick="userRated('1002', 5)"><span class="glyphicon glyphicon-star" id='star1002e'></span></button>
   								</div>
   								<a class="block-a" href="{% url 'recipe_detail' pk=recipe.pk %}">
-  									<img class="block-img img-rounded" src="{{recipe.imageDir}}" style="width: 100%; height: auto;" />
+  									<img class="block-img img-rounded" src="{{recipe.imageDir}}"/>
   									<h4>{{recipe.title}}</h4>
   									<p class="block-text">{{recipe.caption}}</p>
                     {{recipe.bakeType}}
