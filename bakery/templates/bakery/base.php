@@ -54,7 +54,7 @@
                 <li><a href="{% url 'cookies'%}">Cookies</a></li>
                 <li><a href="{% url 'baked-goods'%}">Other Baked goods</a></li>
                 <li><a href="{% url 'liked_list'%}">Liked recipes</a></li>
-		<li><a href="{% url 'recipe_add'%}">Submit you own recipe</a></li>
+		<li><a href="{% url 'add_recipe'%}">Submit you own recipe</a></li>
               </ul>
               <form class="navbar-form navbar-left" action="">
                  <div class="input-group">
