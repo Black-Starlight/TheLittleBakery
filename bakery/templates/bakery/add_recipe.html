@@ -76,7 +76,20 @@
         <textarea data-bind="textInput:newRecipe" maxlength="9000" type="text" class="form-control mb-2 mb-sm-0" id="form" ></textarea>
       </div>
       <span title="Please leave no inputfields empty">
-      <button class="btn btn-warning" type="button" data-bind="click: submitRecipe" class="btn btn-dark"/>Submit</button>
+      <button class="btn btn-warning" type="button" data-bind="click: submitRecipe, enable:
+      newTitle().length > 0 &&
+      newCaption().length > 0 &&
+      newServe().length > 0 &&
+      newPrepTime().length > 0 &&
+      newCookTime().length > 0 &&
+      newKcal().length > 0 &&
+      newFat().length > 0 &&
+      newCarbs().length > 0 &&
+      newSugar().length > 0 &&
+      newProtein().length > 0 &&
+      newSalt().length > 0 &&
+      newIngredients().length > 0 &&
+      newRecipe().length > 0" class="btn btn-dark"/>Submit</button>
       </span>
     </div>
   </div>
