@@ -71,4 +71,17 @@ def save_user_profile(sender, instance, **kwargs):
     def __str__(self):
         return self.text
 
-    
+
+class ProfileComments(models.Model):
+    profile = models.ForeignKey('Profile', related_name='comments')
+    commenter = models.ForeignKey(User, related_name='commenter')
+    comment = models.TextField(max_length=200)
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.comment 
