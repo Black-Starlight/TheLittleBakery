@@ -89,7 +89,8 @@ body{
 }
 
 .block-img{
-	width: 100%;
+	width: 20vw;
+	heigth: 20vw;
 	padding: 15px 15px 0px 15px;
 
 }
