@@ -11,8 +11,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.renderers import TemplateHTMLRenderer
+from django.utils.translation import gettext as _
 
-from .models import Recipes, Comment, Profile
+from .models import Recipes, Comment, Profile, ProfileComments
+from django.contrib.auth.models import User
 from .serializers import RecipeSerializer
 from .forms import CommentForm, UserForm, addRecipeForm
 
@@ -120,6 +122,11 @@ def index(request):
     recipes = Recipes.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'bakery/index.html', {'recipes': recipes})
 
+def users(request):
+    users = User.objects.all()
+    return render(request, 'bakery/users.html', {'users': users, 'profile': Profile})
+
+
 def cakes(request):
     recipes = Recipes.objects.filter(bakeType = 'CAKES').order_by('created_date')
 
@@ -159,32 +166,54 @@ def login_page(request):
     return render(request, 'bakery/registration/login.html', {'recipes': recipes})
 
 
-def profiles(request):
-    profile = Profile
-    return render(request, 'bakery/registration/profile.html', {'profile': profile})
-
 def add_recipe(request):
     form = addRecipeForm()
     return render(request, 'bakery/add_recipe.html', {'form': form})
 
 
-def update_profile(request):
+
+
+def favorite(request, username):
+    return render(request, 'bakery/favorite.html', { 'profile': Profile})
+
+def made(request, username):
+    return render(request, 'bakery/made.html', { 'profile': Profile})
+
+def friends(request, username):
+    return render(request, 'bakery/friends.html', {'profile': Profile})
+
+def get_user_profile(request, username):
+    user = User.objects.get(username=username)
+    profile = Profile
+    if request.method == "POST":
+        form = ProfileCommentsForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.commenter = request.user
+            comment.profile = user.profile
+            comment.save()
+            return redirect('userProfile', username)
+    else:
+        form = ProfileCommentsForm()
+    return render(request, 'bakery/user_profile.html', {"user":user, 'profile': Profile, 'comments_form': form, "comments" : ProfileComments})
+
+def update_profile(request, username):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+        if  profile_form.is_valid():
             profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
-            return redirect('settings:profile')
+            return redirect('userProfile', username)
         else:
             messages.error(request, _('Please correct the error below.'))
     else:
-        user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'registration/profile.html', {
-        'user_form': user_form,
+    return render(request, 'bakery/profile-edit.html', {
         'profile_form': profile_form
     })
 
-
+def liked(request, pk):
+    return HttpResponse('entered text:' + request.POST[pk])
+    if request.method == 'POST':
+        Profile.favs = Profile.favs + recipes
+        return redirect('cakes_cupcakes');
