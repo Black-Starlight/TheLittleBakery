@@ -19,13 +19,21 @@ urlpatterns = [
     url(r'^recipes/', views.recipeList.as_view()),
     url(r'^tweets.(?P<pk>[0-9]+)$', views.recipeList.as_view()),
 
-    url(r'^registration_form$', views.UserFormView.as_view(), name="registration_form"),
-    url(r'^registration/login/$', auth_views.login, {'template_name': 'bakery/registration/login.html'}, name='login_page'),
-    url(r'^registration/profile/$', views.profiles, name='profiles'),
-    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
-
 
     url(r'^recipe/(?P<pk>\d+)/comment/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),  
 
+    url(r'^registration_form$', views.UserFormView.as_view(), name="registration_form"),
+    url(r'^registration/login/$', auth_views.login, {'template_name': 'bakery/registration/login.html'}, name='login_page'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/$', views.get_user_profile, name='userProfile'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/edit$', views.update_profile, name='profile-edit'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/friends$', views.friends, name='friends'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/made$', views.made, name='made'),
+    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/favorite$', views.favorite, name='favorite'),
+
+    url(r'^<(?P<pk>\d+)$', views.liked, name='liked'),
+    url(r'^users$', views.users, name='users'),
+    
     #'''url(r'^add_comment_to_recipe/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),''' 
+    
 ]
