@@ -182,7 +182,7 @@ def get_user_profile(request, username):
         form = ProfileCommentsForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.commenter = request.user
+            comment.commenter = request.username
             comment.profile = user.profile
             comment.save()
             return redirect('userProfile', username)
