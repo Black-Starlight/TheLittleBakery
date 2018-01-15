@@ -40,7 +40,7 @@
           <div id="header-bar">
             <p class="banner-text"><a href="{% url 'index'%}">The Little Bakery</a></p>
           </div>
-          <nav class="navbar navbar-style"  data-spy="affix" data-offset-top="100">
+          <nav class="navbar navbar-style" data-offset-top="100">
             <div class="container-fluid">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
