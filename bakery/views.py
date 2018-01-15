@@ -94,7 +94,7 @@ class UserFormView(View):
 '''
 
 
-def post_new(request):
+def commment(request):
     if request.method == "POST":
         commentform = CommentForm(request.POST)
         if form.is_valid():
@@ -106,7 +106,7 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'eetgelegenheden/post_edit.html', {'form': commentform})
+    return render(request, 'bakery/comment.html', {'form': commentform})
 
 
 
