@@ -34,7 +34,6 @@ urlpatterns = [
 
     url(r'^users$', views.users, name='users'),
     
-    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     '''
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/', views.post_new, name='post_new'),
