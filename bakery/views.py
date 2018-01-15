@@ -92,41 +92,34 @@ class UserFormView(View):
 #        form = CommentForm()
 #    return render(request, 'bakery/add_comment_to_recipe.html', {'form': form})
 '''
+
+'''
+def base(request):
+	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	return render(request, 'bakery/base.html', {'posts': posts})	
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'bakery/post_detail.html', {'post': post})
+
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'eetgelegenheden/post_edit.html', {'form': form})
+'''
+
+
 def add_recipe(request):
     form = addRecipeForm()
     return render(request, 'bakery/add_recipe.html', {'form': form})
-
-def add_comment_to_recipe(request):
-	form = CommentForm(request.POST or None)
-
-	if request.method == "POST":
-		if form.is_valid():
-			temp = form.save(commit=False)
-			parent = form['parent'].value()
-
-			if parent == "": # set a blank path then save it to get an ID
-				temp.path = []
-				temp.save() # converting ID to int because save() gives a long int ID
-				id = int(temp.id)
-				temp.path = [id]
-			else: # get the parent node
-				node = Comment.objects.get(id = parent)
-				temp.depth = node.depth + 1
-				s = str(node.path)
-				temp.path = eval(s)
-
-				#store parents path than apply comment ID
-				temp.save()
-
-				id= int(temp.id)
-				temp.path.append(id)
-
-			temp.save() # here i have reversed the order
-
-
-	comment_tree = Comment.objects.all().order_by("-path")
-
-	return render(request, 'recipe_detail.html', locals())
 
 
 
