@@ -68,27 +68,18 @@ class UserFormView(View):
                     return render(request, 'bakery/index.html', )
 
         return render(request, self.template_name, {'form': form})
-'''
-#    recipe = get_object_or_404(Recipes, pk=pk)
-#    if request.method == "POST":
-#        form = CommentForm(request.POST)
-#        if form.is_valid():
-#            comment = form.save(commit=False)
-#            comment.recipe = recipe
-#            comment.save()
-#           return redirect('recipe_detail', pk=recipe.pk)
-#    else:
-#        form = CommentForm()
-#    return render(request, 'bakery/add_comment_to_recipe.html', {'form': form})
-'''
 
-def add_comment_to_recipe(request):
+
+def commentRecipe(request, pk):
 	form = CommentForm(request.POST or None)
+	recipe = get_object_or_404(Recipe, pk=pk)
 
 	if request.method == "POST":
 		if form.is_valid():
 			temp = form.save(commit=False)
 			parent = form['parent'].value()
+			form.commenter = request.user
+			form.recipe = recipe
 
 			if parent == "": # set a blank path then save it to get an ID
 				temp.path = []
@@ -112,7 +103,7 @@ def add_comment_to_recipe(request):
 
 	comment_tree = Comment.objects.all().order_by("-path")
 
-	return render(request, 'recipe_detail.html', locals())
+	return render(request, 'recipe_detail.html', {'recipes': recipe, 'profile': Profile, 'commentForm': form})
 
 
 
