@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.models import User
-from .models import Comment, Profile, ProfileComments, Recipes
+from .models import Comments, Profile, ProfileComments, Recipes
 
 
 class UserForm(forms.ModelForm):
