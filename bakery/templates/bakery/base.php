@@ -21,6 +21,9 @@
         <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
         <!-- Font -->
         <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+        
+        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
         <script>
             $(document).ready(function(){
                 $("#commenters").on("click", ".reply", function(event){
