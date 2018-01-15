@@ -90,5 +90,32 @@
 </div>
 </div>
 
+<div class="panel-group col-md-12" id="accordion" style="margin-top: 30px">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Comments</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+        
+              {% for comment in recipe.comments.all %}
+                <div class="media">
+                    <div class="media-body">
+                      <h4 class="media-heading">{{comment.author}}</a> <small><i>{{comment.created_date}}</i></small></h4>
 
+     <p>{{comment.text|linebreaks}}</p>
+    </div>
+ </div>
+ {% empty %}
+     <p>No comments here yet :(</p>
+{% endfor %}
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}
