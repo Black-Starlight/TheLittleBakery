@@ -96,9 +96,9 @@ class UserFormView(View):
 
 def commment(request):
     if request.method == "POST":
-        commentform = CommentForm(request.POST)
+        form = CommentForm(request.POST)
         if form.is_valid():
-            comment = commentform.save(commit=False)
+            comment = form.save(commit=False)
             comment.commenter = request.user
             comment.published_date = timezone.now()
             comment.profile = profile
@@ -106,7 +106,7 @@ def commment(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'bakery/comment.html', {'form': commentform})
+    return render(request, 'bakery/comment.html', {'form': form})
 
 
 
