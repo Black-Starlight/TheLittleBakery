@@ -71,9 +71,10 @@ class Comments(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
+    approved_comment = models.BooleanField(default=False)
  
-    def publish(self):
-        self.published_date = timezone.now()
+    def approve(self):
+        self.approved_comment = True
         self.save()
 
     def __str__(self):
