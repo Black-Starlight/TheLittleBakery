@@ -93,16 +93,12 @@ class UserFormView(View):
 #    return render(request, 'bakery/add_comment_to_recipe.html', {'form': form})
 '''
 
-def comment(request):
-	posts = Comments.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-	return render(request, 'bakery/comment.html', {'posts': posts})	
-
 
 def post_new(request):
     if request.method == "POST":
-        form = CommentForm(request.POST)
+        commentform = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
+            comment = commentform.save(commit=False)
             comment.commenter = request.user
             comment.published_date = timezone.now()
 	    comment.profile = profile
@@ -110,7 +106,7 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'eetgelegenheden/post_edit.html', {'form': form})
+    return render(request, 'eetgelegenheden/post_edit.html', {'form': commentform})
 
 
 
@@ -161,7 +157,19 @@ def recipe_list(request):
 
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
-    return render(request, 'bakery/recipe_detail.html', {'recipe': recipe, 'profile': Profile})
+    posts = Comments.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    if request.method == "POST":
+        commentform = CommentForm(request.POST)
+        if form.is_valid():
+            comment = commentform.save(commit=False)
+            comment.commenter = request.user
+            comment.published_date = timezone.now()
+	    comment.profile = profile
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'bakery/recipe_detail.html', {'form': commentform, 'posts': posts, recipe': recipe, 'profile': Profile})
 
 
 def login_page(request):
