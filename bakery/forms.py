@@ -3,11 +3,6 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Comments, Profile, ProfileComments, Recipes
 
-#class CommentForm(forms.ModelForm):
-
-#    class Meta:
-#        model = Comment
-#        fields = ('name', 'rate', 'text')
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -27,13 +22,8 @@ class CommentForm(forms.ModelForm):
     parent = forms.CharField(max_length = 50, widget=forms.HiddenInput(attrs={'class': 'parent'}), required=False)
 
     class Meta:
-        model = Comment
+        model = Comments
         fields = ['content']
-
-
-   # class Meta:
-    #    model = Comment
-     #   fields = ('name', 'rate', 'text')
 
 class addRecipeForm(forms.ModelForm):
     class Meta:
