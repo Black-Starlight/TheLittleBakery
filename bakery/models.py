@@ -40,8 +40,8 @@ class Recipes(models.Model):
         return self.title
 
 class Comments(models.Model):
-    author = models.ForeignKey('auth.User')
-    title = models.CharField(max_length=200)
+    author = models.ForeignKey(User, related_name='author')
+    profile = models.ForeignKey(Profiles, related_name='profiles')
     text = models.TextField()
     created_date = models.DateTimeField(
             default=timezone.now)
