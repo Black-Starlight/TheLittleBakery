@@ -101,7 +101,7 @@ def commment(request):
             comment = form.save(commit=False)
             comment.published_date = timezone.now()
             comment.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('recipe_detail', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'bakery/comment.html', {'form': form})
