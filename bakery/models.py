@@ -11,7 +11,7 @@ class Recipes(models.Model):
      ('PIES', 'pies'), ('COOKIES', 'cookies'), ('OTHER', 'other'))
 
     title= models.CharField(max_length=17)
-    imageDir = models.CharField(max_length=100)
+    imageDir = models.TextField(null=True, blank=True)
     caption = models.CharField(max_length=40)
     text = models.TextField(max_length=200, default="")
     bakeType = models.CharField(max_length=10, choices=bakeChoices, default="CAKES")
