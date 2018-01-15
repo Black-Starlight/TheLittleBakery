@@ -108,8 +108,8 @@ def add_recipe(request):
     form = addRecipeForm()
     return render(request, 'bakery/add_recipe.html', {'form': form})
 
-def add_comment_to_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+def add_comment_to_recipe(request, pk):
+    post = get_object_or_404(Recipes, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -119,7 +119,7 @@ def add_comment_to_post(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+    return render(request, 'bakery/add_comment_to_recipe.html', {'form': form})
 
 
 def index(request):
