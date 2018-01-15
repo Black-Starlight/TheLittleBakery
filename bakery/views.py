@@ -116,7 +116,7 @@ def add_comment_to_recipe(request, pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('recipe_detail', pk=pk)
+            return redirect('recipe_detail', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'bakery/add_comment_to_recipe.html', {'form': form})
