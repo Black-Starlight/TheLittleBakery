@@ -85,7 +85,8 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body">
-        
+        <a class="profile-but" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Create comment</a>
+              <hr>
               {% for comment in recipe.comments.all %}
                 <div class="media">
                     <div class="media-body">
