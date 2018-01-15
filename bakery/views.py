@@ -136,7 +136,7 @@ def index(request):
 
 def users(request):
     users = User.objects.all()
-    return render(request, 'bakery/users.html', {'users': U, 'profile': Profile})
+    return render(request, 'bakery/users.html', {'U': users, 'profile': Profile})
 
 
 def cakes(request):
