@@ -75,17 +75,18 @@
 <div class="row">
           <div class="col-sm-12">
             <br />
+                <a class="profile-but" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Create comment</a>
                 
-       {% for post in posts %}
-                      <div class="media">
-                    <div class="media-body">
-                          <h4 class="media-heading">><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ post.title }}</a> <small><i>{{comment.created_date}}</i></small></h4>
-                          <small><i>{{ post.created_date}}</i></small></h4>
-                          <p>{{ post.text|linebreaks }}</p>
-                      
-                         {% empty %}
-                             <p>No comments here yet :(</p>
-                        {% endfor %}
+      
+                            {% for comment in recipe.comments.all %}
+    <div class="comment">
+        <div class="date">{{ post.created_date }}</div>
+        <strong>{{ post.author }}</strong>
+        <p>{{ post.text|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
                
 </div>
 </div>
