@@ -18,12 +18,9 @@ class ProfileForm(forms.ModelForm):
         fields = ['bio', 'location', 'birth_date']
 
 class CommentForm(forms.ModelForm):
-    #Hidden value to get a child's parent
-    parent = forms.CharField(max_length = 50, widget=forms.HiddenInput(attrs={'class': 'parent'}), required=False)
-
     class Meta:
-        model = Comments
-        fields = ['content']
+        model = Post
+        fields = ('title', 'text',)
 
 class addRecipeForm(forms.ModelForm):
     class Meta:
