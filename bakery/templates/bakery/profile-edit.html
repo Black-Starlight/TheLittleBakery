@@ -1,7 +1,7 @@
 {% extends 'bakery/base.php' %}
 
 {% block content %}
-  {%if user.name == request.user.username %}
+  {%if user.username == request.user.username %}
     <form method="post">
       {% csrf_token %}
       {{ profile_form.as_p }}
