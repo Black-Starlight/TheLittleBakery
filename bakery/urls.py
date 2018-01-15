@@ -21,9 +21,6 @@ urlpatterns = [
     url(r'^tweets.(?P<pk>[0-9]+)$', views.recipeList.as_view()),
     url(r'^profiles/', views.profileList.as_view()),
 
-
-    url(r'^recipe/(?P<pk>\d+)/comment/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),  
-
     url(r'^registration_form$', views.UserFormView.as_view(), name="registration_form"),
     url(r'^registration/login/$', auth_views.login, {'template_name': 'bakery/registration/login.html'}, name='login_page'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
