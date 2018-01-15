@@ -37,6 +37,4 @@ urlpatterns = [
    
     url(r'^recipe/new/', views.post_new, name='post_new'),
     
-    
-    
 ]
