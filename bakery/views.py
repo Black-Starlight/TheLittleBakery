@@ -101,7 +101,6 @@ def commment(request):
             comment = form.save(commit=False)
             comment.commenter = request.user
             comment.published_date = timezone.now()
-            comment.profile = request.user.Profile
             comment.save()
             return redirect('post_detail', pk=post.pk)
     else:
