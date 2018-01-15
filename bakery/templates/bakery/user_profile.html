@@ -3,7 +3,7 @@
 
 {% block content %}
 <h1>{{user.username}}
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user.username == request.user.username  %}
     <span class="edit">
         <a href="{% url 'profile-edit' user.username %}"><span class="glyphicon glyphicon-pencil"></span>edit profile</a>
     </span>
