@@ -40,15 +40,20 @@ class Recipes(models.Model):
         return self.title
 
 class Comments(models.Model):
-    commenter = models.ForeignKey(User, related_name='commenterR')
-    recipe = models.ForeignKey(Recipes, related_name='commentsR')
-    content = models.TextField(default='empty')
-    date = models.DateTimeField(default=timezone.now)
-    path = models.CharField(validators=[validate_comma_separated_integer_list], blank=True, editable=False, max_length=50)
-    depth = models.PositiveSmallIntegerField(default=0)
+    author = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    published_date = models.DateTimeField(
+            blank=True, null=True)
 
-    def __unicode__(self):
-        return self.content
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title
 
 
 class Profile(models.Model):
