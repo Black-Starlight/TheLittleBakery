@@ -63,7 +63,7 @@ def save_user_profile(sender, instance, **kwargs):
     def __str__(self):
         return self.text
     
-class Comments(models.Model):
+class Comment(models.Model):
     author = models.ForeignKey(User, related_name='author')
     profile = models.ForeignKey(Profile, related_name='profiles')
     text = models.TextField()
