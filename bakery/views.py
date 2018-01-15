@@ -93,10 +93,9 @@ class UserFormView(View):
 #    return render(request, 'bakery/add_comment_to_recipe.html', {'form': form})
 '''
 
-'''
-def base(request):
+def comment(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-	return render(request, 'bakery/base.html', {'posts': posts})	
+	return render(request, 'bakery/comment.html', {'posts': posts})	
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -114,7 +113,7 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'eetgelegenheden/post_edit.html', {'form': form})
-'''
+
 
 
 def add_recipe(request):
