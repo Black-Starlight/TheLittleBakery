@@ -88,14 +88,15 @@
                           <small><i>{{ post.created_date}}</i></small></h4>
                           <p>{{ post.text|linebreaks }}</p>
                       
- {% empty %}
-     <p>No comments here yet :(</p>
-{% endfor %}
-        </div>
-</div>
+                         {% empty %}
+                             <p>No comments here yet :(</p>
+                        {% endfor %}
+                                </div>
+                        </div>
             </div>
           </div>
-
+</div>
+</div>
 
 
 {% endblock %}
