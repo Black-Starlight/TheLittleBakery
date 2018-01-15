@@ -75,12 +75,12 @@
 <div class="row">
           <div class="col-sm-12">
             <br />
-                <a class="profile-but" href="{% url 'add_comment_to_recipe' pk=post.pk %}">Create comment</a>
+                <a class="profile-but" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Create comment</a>
                 <br />
                        {% for post in posts %}
                       <div>
                           <hr>
-                          <h4><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h4>
+                          <h4><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ post.title }}</a></h4>
                           <p>{{ post.text|linebreaksbr }}</p>
                           <p>published: {{ post.published_date }}</p>
                       </div>
