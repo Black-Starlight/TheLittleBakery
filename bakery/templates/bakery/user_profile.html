@@ -3,14 +3,12 @@
 
 {% block content %}
 <h1>{{user.username}}
-    {% if user.is_authenticated and user.name is request.user.username %}
+    {% if user.is_authenticated %}
     <span class="edit">
         <a href="{% url 'profile-edit' user.username %}"><span class="glyphicon glyphicon-pencil"></span>edit profile</a>
     </span>
     {% else %}
-
         <button type="submit" class="save btn btn-default">add as friend</button>
-    
     {% endif %}
   </h1>
   <small>{{user.profile.location}}</small>
