@@ -19,7 +19,7 @@ class ProfileForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = Comments
         fields = ['author', 'text']
 
 class addRecipeForm(forms.ModelForm):
