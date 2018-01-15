@@ -17,7 +17,7 @@ from django.utils.translation import gettext as _
 
 from .models import Recipes, Comments, Profile, ProfileComments
 from django.contrib.auth.models import User
-from .serializers import RecipeSerializer, ProfileSerializer
+from .serializers import RecipeSerializer
 from .forms import CommentForm, UserForm, addRecipeForm, ProfileForm, ProfileCommentsForm
 
 
@@ -31,19 +31,6 @@ class recipeList(APIView):
 
     def post(self, request):
         serializer = RecipeSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class profileList(APIView):
-    def get(self, request):
-        profiles = Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = ProfileSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
