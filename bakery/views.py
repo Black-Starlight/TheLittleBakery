@@ -116,7 +116,7 @@ def recipe_list(request):
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
     form = CommentForm(request.POST or None)
-	recipe = get_object_or_404(Recipe, pk=pk)
+    recipe = get_object_or_404(Recipe, pk=pk)
 
 	if request.method == "POST":
 		if form.is_valid():
