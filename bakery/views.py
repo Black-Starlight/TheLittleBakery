@@ -15,7 +15,7 @@ from rest_framework import status
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.utils.translation import gettext as _
 
-from .models import Recipes, Comment, Profile, ProfileComments
+from .models import Recipes, Comments, Profile, ProfileComments
 from django.contrib.auth.models import User
 from .serializers import RecipeSerializer
 from .forms import CommentForm, UserForm, addRecipeForm, ProfileForm, ProfileCommentsForm
