@@ -35,6 +35,6 @@ urlpatterns = [
     url(r'^users$', views.users, name='users'),
     
    
-    url(r'^recipe/new/', views.post_new, name='post_new'),
+    url(r'^recipe/new/', views.commment, name='comment'),
     
 ]
