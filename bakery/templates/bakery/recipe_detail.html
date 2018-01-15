@@ -76,12 +76,7 @@
           <div class="col-sm-12">
             <br />
                 
-                       
-      <div id="collapse1" class="panel-collapse collapse">
-        <div class="panel-body">
-              <a class="profile-but" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Create comment</a>
-                <br />
-              {% for post in posts %}
+       {% for post in posts %}
                       <div class="media">
                     <div class="media-body">
                           <h4 class="media-heading">><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ post.title }}</a> <small><i>{{comment.created_date}}</i></small></h4>
@@ -91,10 +86,7 @@
                          {% empty %}
                              <p>No comments here yet :(</p>
                         {% endfor %}
-                                </div>
-                        </div>
-            </div>
-          </div>
+               
 </div>
 </div>
 
