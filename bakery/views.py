@@ -128,19 +128,7 @@ def recipe_list(request):
     return render(request, 'bakery/recipe_list.html', {'recipes': recipes, 'profile': Profile})
 
 def recipe_detail(request, pk):
-    recipe = get_object_or_404(Recipes, pk=pk)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.commenter = request.user
-            comment.recipe = recipe
-            comment.save()
-            return redirect('recipe_detail', pk)
-    else:
-        form = CommentForm()
-    
-    return render(request, 'bakery/recipe_detail.html', {'recipes': recipe, 'profile': Profile, 'commentForm': form, 'comments' : Comments})
+    return render(request, 'bakery/recipe_detail.html', {'recipes': recipe, 'profile': Profile})
     
 
 def login_page(request):
