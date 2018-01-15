@@ -39,21 +39,7 @@ class Recipes(models.Model):
     def __str__(self):
         return self.title
 
-class Comments(models.Model):
-    author = models.ForeignKey(User, related_name='author')
-    profile = models.ForeignKey(Profile, related_name='profiles')
-    text = models.TextField()
-    created_date = models.DateTimeField(
-            default=timezone.now)
-    published_date = models.DateTimeField(
-            blank=True, null=True)
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
-
-    def __str__(self):
-        return self.title
 
 
 class Profile(models.Model):
@@ -76,6 +62,22 @@ def save_user_profile(sender, instance, **kwargs):
 
     def __str__(self):
         return self.text
+    
+class Comments(models.Model):
+    author = models.ForeignKey(User, related_name='author')
+    profile = models.ForeignKey(Profile, related_name='profiles')
+    text = models.TextField()
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    published_date = models.DateTimeField(
+            blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title 
 
 
 class ProfileComments(models.Model):
