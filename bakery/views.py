@@ -99,7 +99,6 @@ def commment(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.commenter = request.user
             comment.published_date = timezone.now()
             comment.save()
             return redirect('post_detail', pk=post.pk)
