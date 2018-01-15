@@ -5,6 +5,7 @@
     {% for recipe in recipes %}
         <div class="col-sm-3">
 							<div class="block">
+		{% if user.is_authenticated %}
                   {% with recipe.pk|stringformat:"s" as id %}
                     {% with "heart"|add:id as heart_id %}
                             <button name="{{heart_id}}" type="submit" class="heart" onClick="liked('{{heart_id}}')">
@@ -12,6 +13,7 @@
                             </button>
                     {% endwith %}
                 {% endwith %}
+		{% endif%}						
                   <div class="rating">
                     {% with recipe.pk|stringformat:"s" as id %}
                       {% with id|add:'a' as a_id %}
