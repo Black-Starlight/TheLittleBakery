@@ -157,7 +157,7 @@ def recipe_list(request):
 
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
-    return render(request, 'bakery/recipe_detail.html', { 'posts': posts, recipe': recipe, 'profile': Profile})
+    return render(request, 'bakery/recipe_detail.html', {'posts': posts, 'recipe': recipe, 'profile': Profile})
 
 
 def login_page(request):
