@@ -69,44 +69,6 @@ class UserFormView(View):
 
         return render(request, self.template_name, {'form': form})
 
-
-def commentRecipe(request, pk):
-	form = CommentForm(request.POST or None)
-	recipe = get_object_or_404(Recipe, pk=pk)
-
-	if request.method == "POST":
-		if form.is_valid():
-			temp = form.save(commit=False)
-			parent = form['parent'].value()
-			form.commenter = request.user
-			form.recipe = recipe
-
-			if parent == "": # set a blank path then save it to get an ID
-				temp.path = []
-				temp.save() # converting ID to int because save() gives a long int ID
-				id = int(temp.id)
-				temp.path = [id]
-			else: # get the parent node
-				node = Comment.objects.get(id = parent)
-				temp.depth = node.depth + 1
-				s = str(node.path)
-				temp.path = eval(s)
-
-				#store parents path than apply comment ID
-				temp.save()
-
-				id= int(temp.id)
-				temp.path.append(id)
-
-			temp.save() # here i have reversed the order
-
-
-	comment_tree = Comment.objects.all().order_by("-path")
-
-	return render(request, 'recipe_detail.html', {'recipes': recipe, 'profile': Profile, 'commentForm': form})
-
-
-
 def index(request):
     recipes = Recipes.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'bakery/index.html', {'recipes': recipes, 'profile': Profile})
@@ -153,7 +115,39 @@ def recipe_list(request):
 
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
-    return render(request, 'bakery/recipe_detail.html', {'recipe': recipe, 'profile': Profile})
+    form = CommentForm(request.POST or None)
+	recipe = get_object_or_404(Recipe, pk=pk)
+
+	if request.method == "POST":
+		if form.is_valid():
+			temp = form.save(commit=False)
+			parent = form['parent'].value()
+			form.commenter = request.user
+			form.recipe = recipe
+
+			if parent == "": # set a blank path then save it to get an ID
+				temp.path = []
+				temp.save() # converting ID to int because save() gives a long int ID
+				id = int(temp.id)
+				temp.path = [id]
+			else: # get the parent node
+				node = Comment.objects.get(id = parent)
+				temp.depth = node.depth + 1
+				s = str(node.path)
+				temp.path = eval(s)
+
+				#store parents path than apply comment ID
+				temp.save()
+
+				id= int(temp.id)
+				temp.path.append(id)
+
+			temp.save() # here i have reversed the order
+
+
+	comment_tree = Comment.objects.all().order_by("-path")
+	return render(request, 'bakery/recipe_detail.html', {'recipes': recipe, 'profile': Profile, 'commentForm': form})
+    
 
 def login_page(request):
     recipes = Recipes.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
