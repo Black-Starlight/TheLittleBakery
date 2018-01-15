@@ -1,12 +1,9 @@
 
 {% extends 'bakery/base.php' %}
 {% block content %}
-       {% for post in posts %}
-    <div>
-        <hr>
-        <h4><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h4>
-        <p>{{ post.text|linebreaksbr }}</p>
-        <p>published: {{ post.published_date }}</p>
-    </div>
-       {% endfor %}
+        <h4>New post</h4>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
 {% endblock %}
