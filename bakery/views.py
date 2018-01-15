@@ -49,6 +49,7 @@ class UserFormView(View):
     # process form data
     def post(self, request):
         form = self.form_class(request.POST)
+
         if form.is_valid():
             user = form.save(commit=False)
 
