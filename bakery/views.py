@@ -157,19 +157,7 @@ def recipe_list(request):
 
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
-    posts = Comments.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    if request.method == "POST":
-        commentform = CommentForm(request.POST)
-        if form.is_valid():
-            comment = commentform.save(commit=False)
-            comment.commenter = request.user
-            comment.published_date = timezone.now()
-	    comment.profile = profile
-            comment.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = CommentForm()
-    return render(request, 'bakery/recipe_detail.html', {'form': commentform, 'posts': posts, recipe': recipe, 'profile': Profile})
+    return render(request, 'bakery/recipe_detail.html', { 'posts': posts, recipe': recipe, 'profile': Profile})
 
 
 def login_page(request):
