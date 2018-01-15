@@ -17,7 +17,7 @@ from django.utils.translation import gettext as _
 
 from .models import Recipes, Comments, Profile, ProfileComments
 from django.contrib.auth.models import User
-from .serializers import RecipeSerializer
+from .serializers import RecipeSerializer, ProfileSerializer
 from .forms import CommentForm, UserForm, addRecipeForm, ProfileForm, ProfileCommentsForm
 
 
