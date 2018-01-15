@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^liked_list$', views.liked_list, name='liked_list'),
     url(r'^add_recipe$', views.add_recipe, name='add_recipe'), 
 
-    url(r'^recipe/(?P<pk>\d+)/$', views.recipe_detailC, name='recipe_detail'),
+    url(r'^recipe/(?P<pk>\d+)/$', views.recipe_detail, name='recipe_detail'),
     url(r'^recipes/', views.recipeList.as_view()),
     url(r'^tweets.(?P<pk>[0-9]+)$', views.recipeList.as_view()),
     url(r'^profiles/', views.profileList.as_view()),
