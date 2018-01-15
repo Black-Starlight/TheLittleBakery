@@ -39,9 +39,9 @@ class Recipes(models.Model):
     def __str__(self):
         return self.title
 
-class Comment(models.Model):
-    commenter = models.ForeignKey(User, related_name='commenterR', blank=True )
-    recipe = models.ForeignKey(Recipes, related_name='commentsR', blank=True )
+class Comments(models.Model):
+    commenter = models.ForeignKey(User, related_name='commenterR')
+    recipe = models.ForeignKey(Recipes, related_name='commentsR')
     content = models.TextField(default='empty')
     date = models.DateTimeField(default=timezone.now)
     path = models.CharField(validators=[validate_comma_separated_integer_list], blank=True, editable=False, max_length=50)
