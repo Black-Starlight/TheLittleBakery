@@ -68,7 +68,7 @@ class UserFormView(View):
                     return render(request, 'bakery/index.html', )
 
         return render(request, self.template_name, {'form': form})
-
+     return render(request, 'bakery/index.html', ) 		
 
 '''
 #    recipe = get_object_or_404(Recipes, pk=pk)
