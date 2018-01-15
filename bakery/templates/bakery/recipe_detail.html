@@ -87,10 +87,7 @@
                           <h4 class="media-heading">><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ post.title }}</a> <small><i>{{comment.created_date}}</i></small></h4>
                           <small><i>{{ post.created_date}}</i></small></h4>
                           <p>{{ post.text|linebreaks }}</p>
-                      </div>
-            
-    </div>
- </div>
+                      
  {% empty %}
      <p>No comments here yet :(</p>
 {% endfor %}
