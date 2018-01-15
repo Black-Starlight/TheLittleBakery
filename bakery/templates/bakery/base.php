@@ -89,6 +89,8 @@
 
             {% block content %}
             {% endblock %}
+            {% block add_recipe %}
+            {% endblock %}
             <!-- Knockout -->
             <script src="{% static 'javascript/knockout-3.4.2.js' %}"></script>
             <!-- JavaScript to add recipe -->
