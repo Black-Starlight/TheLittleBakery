@@ -77,7 +77,14 @@
             <br />
 
                 <br />
-                
+                       {% for post in posts %}
+                      <div>
+                          <hr>
+                          <h4><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h4>
+                          <p>{{ post.text|linebreaksbr }}</p>
+                          <p>published: {{ post.published_date }}</p>
+                      </div>
+                         {% endfor %}
                
       
             </div>
