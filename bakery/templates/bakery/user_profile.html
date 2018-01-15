@@ -26,7 +26,7 @@
   </div>
   <div class="col-md-6 profile-box profile-block-left">
   <h3>Made recipes</h3>
-  {% for r in user.profile.made.all|slice:":4" %}
+  {% for r in user.profile.made.all|slice:":2" %}
     <div class="col-md-5 block" style="margin-right: 10px">
       <a class="block-a" href="{% url 'recipe_detail' pk=r.pk %}">
         <img class="block-img img-rounded" src="../{{r.imageDir}}" />
@@ -38,7 +38,7 @@
 </div>
 <div class="col-md-6 profile-box profile-block-right">
   <h3>Liked Recipes</h3>
-  {% for fav in user.profile.favs.all|slice:":4" %}
+  {% for fav in user.profile.favs.all|slice:":2" %}
     <div class="col-md-5 block" style="margin-right: 10px">
       <a class="block-a" href="{% url 'recipe_detail' pk=fav.pk %}">
         <img class="block-img img-rounded" src="../{{fav.imageDir}}" />
