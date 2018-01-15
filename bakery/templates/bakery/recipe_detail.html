@@ -75,7 +75,11 @@
 <div class="row">
           <div class="col-sm-12">
             <br />
-
+                <h4>New post</h4>
+                <form method="POST" class="post-form">{% csrf_token %}
+                    {{ commentform.as_p }}
+                    <button type="submit" class="save btn btn-default">Save</button>
+                </form>
                 <br />
                        {% for post in posts %}
                       <div>
