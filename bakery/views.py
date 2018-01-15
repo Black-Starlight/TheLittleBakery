@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import Recipes, Comment, Profile, ProfileComments
+from .models import Recipes, Comments, Profile, ProfileComments
 from django.contrib.auth.models import User
 from .serializers import RecipeSerializer, ProfileSerializer
 from .forms import CommentForm, UserForm, addRecipeForm, ProfileForm, ProfileCommentsForm
@@ -116,7 +116,7 @@ def add_comment_to_recipe(request, pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('recipe_detail', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'bakery/add_comment_to_recipe.html', {'form': form})
@@ -163,7 +163,7 @@ def recipe_list(request):
 
 def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
-    posts = Comment.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
+    posts = Comments.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'bakery/recipe_detail.html', {'posts': posts, 'recipe': recipe, 'profile': Profile})
 
 
