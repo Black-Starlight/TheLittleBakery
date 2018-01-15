@@ -34,5 +34,6 @@ urlpatterns = [
 
     url(r'^users$', views.users, name='users'),
     
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     
 ]
