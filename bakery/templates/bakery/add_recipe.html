@@ -1,7 +1,7 @@
 {% extends 'bakery/base.php' %}
 {% load staticfiles %}
 {% block add_recipe %}
-{% if user.is_authenticated %}
+
 <h1>Add recipe</h1>
 <form>
   <div class="col-auto" style="max-width: 750px; padding: 15px; margin-left: auto;
@@ -98,7 +98,5 @@
   </div>
 
 </form>
-{% else %}
-<p>You aren't logged in at the moment. <a href="{% url 'login_page'%}">Log in</a> or <a href="{% url 'registration_form'%}">sign in</a> to see your profile</p>
-{% endif %}
+
 {% endblock %}
