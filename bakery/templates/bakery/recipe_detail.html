@@ -77,7 +77,7 @@
             <br />
                 <a class="profile-but" href="{% url 'add_comment_to_recipe' pk=recipe.pk %}">Create comment</a>
               <hr>
-                  {% for comment in post.comments.all %}
+                  {% for comment in recipe.comments.all %}
                       <div class="comment">
                           <div class="date">{{ comment.created_date }}</div>
                           <strong>{{ comment.author }}</strong>
