@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import Recipes, Comment, Profile, ProfileComments
+from .models import Recipes, Comments, Profile, ProfileComments
 from django.contrib.auth.models import User
 from .serializers import RecipeSerializer, ProfileSerializer
 from .forms import CommentForm, UserForm, addRecipeForm, ProfileForm, ProfileCommentsForm
