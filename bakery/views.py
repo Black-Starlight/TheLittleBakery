@@ -15,13 +15,8 @@ from rest_framework import status
 
 from .models import Recipes, Comment, Profile, ProfileComments
 from django.contrib.auth.models import User
-from .serializers import RecipeSerializer
-from .forms import CommentForm, UserForm, ProfileForm, ProfileCommentsForm
-
-
-
-
-
+from .serializers import RecipeSerializer, ProfileSerializer
+from .forms import CommentForm, UserForm, addRecipeForm, ProfileForm, ProfileCommentsForm
 
 
 
@@ -32,8 +27,25 @@ class recipeList(APIView):
         serializer = RecipeSerializer(recipes, many=True)
         return Response(serializer.data)
 
-    def post(self):
-        pass
+    def post(self, request):
+        serializer = RecipeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class profileList(APIView):
+    def get(self, request):
+        profiles = Profile.objects.all()
+        serializer = ProfileSerializer(profiles, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserFormView(View):
