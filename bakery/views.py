@@ -49,12 +49,6 @@ class UserFormView(View):
     # process form data
     def post(self, request):
         form = self.form_class(request.POST)
-
-
-def add_comment_to_recipe(request, pk):
-    recipe = get_object_or_404(Recipes, pk=pk)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
 
@@ -73,6 +67,8 @@ def add_comment_to_recipe(request, pk):
                     return HttpResponseRedirect('/')
 
         return render(request, self.template_name, {'form': form})
+
+
 '''
 #    recipe = get_object_or_404(Recipes, pk=pk)
 #    if request.method == "POST":
