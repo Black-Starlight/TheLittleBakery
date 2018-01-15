@@ -9,4 +9,4 @@ class RecipeSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('user','bio', 'location', 'birth_date', 'favs', 'made','friends')
+        fields = ('pk', 'user','bio', 'location', 'birth_date', 'favs', 'made','friends')
