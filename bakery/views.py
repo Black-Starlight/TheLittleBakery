@@ -173,20 +173,6 @@ def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipes, pk=pk)
     return render(request, 'bakery/recipe_detail.html', {'recipe': recipe, 'profile': Profile})
 
-def recipe_detailC(request, pk):
-    recipe = get_object_or_404(Recipes, pk=pk)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.recipe = recipe
-            comment.commenter = request.user
-            comment.save()
-            return redirect('recipe_detail', pk=recipe.pk)
-    else:
-        form = CommentForm()
-    return render(request, 'bakery/add_comment_to_recipe.html', {'commentform': form, 'profile': Profile, 'recipe':recipe})
-
 
 def login_page(request):
     recipes = Recipes.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
