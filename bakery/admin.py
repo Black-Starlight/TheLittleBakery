@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Recipes, Comments, Profile, ProfileComments
+from .models import Recipes, Comment, Profile, ProfileComments
 
 
 admin.site.register(Recipes)
