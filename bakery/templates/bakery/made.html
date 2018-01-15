@@ -3,9 +3,9 @@
 {% block content %}
 <h3>Made recipes</h3>
   {% for r in user.profile.made.all %}
-    <div class="col-md-3 block" style="margin-right: 10px">
+    <div class="col-md-2 block" style="margin-right: 10px">
       <a class="block-a" href="{% url 'recipe_detail' pk=r.pk %}">
-        <img class="block-img img-rounded" src="../{{r.imageDir}}" />
+        <img class="block-img img-rounded" src="{{r.imageDir}}" />
         <h4>{{r.title}}</h4>
       </a>
     </div>
