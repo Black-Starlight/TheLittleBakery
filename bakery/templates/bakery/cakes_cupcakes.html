@@ -1,9 +1,7 @@
 {% extends 'bakery/base.php' %}
 {% load staticfiles %}
-{% load ratings %}
 
 {% block content %}
-{% ratings object %}
     {% for recipe in recipes %}
         <div class="col-sm-3">
 							<div class="block">
