@@ -128,7 +128,7 @@ def recipe_list(request):
     return render(request, 'bakery/recipe_list.html', {'recipes': recipes, 'profile': Profile})
 
 def recipe_detail(request, pk):
-    return render(request, 'bakery/recipe_detail.html', {'recipes': recipe, 'profile': Profile})
+    return render(request, 'bakery/recipe_detail.html', {'recipe': Recipe, 'profile': Profile})
     
 
 def login_page(request):
