@@ -96,6 +96,7 @@ def commment(request):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.published_date = timezone.now()
+            comment.post = recipe
             comment.save()
             return redirect('recipe_detail', pk=post.pk)
     else:
@@ -114,7 +115,7 @@ def add_comment_to_recipe(request, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post
+            comment.recipe = post
             comment.save()
             return redirect('recipe_detail', pk=post.pk)
     else:
