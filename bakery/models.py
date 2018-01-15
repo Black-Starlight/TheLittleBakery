@@ -41,7 +41,7 @@ class Recipes(models.Model):
 
 class Comment(models.Model):
     commenter = models.ForeignKey(User, related_name='commenter')
-    recipe = models.ForeignKey(Recipe, related_name='comments')
+    recipe = models.ForeignKey(Recipes, related_name='comments')
     content = models.TextField(default='empty')
     date = models.DateTimeField(default=timezone.now)
     path = models.CharField(validators=[validate_comma_separated_integer_list], blank=True, editable=False, max_length=50)
