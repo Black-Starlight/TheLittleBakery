@@ -64,7 +64,7 @@ def save_user_profile(sender, instance, **kwargs):
         return self.text
     
 class Comment(models.Model):
-    author = models.ForeignKey(User, related_name='author')
+    author =  models.CharField(max_length=20)
     text = models.TextField()
     created_date = models.DateTimeField(
             default=timezone.now)
