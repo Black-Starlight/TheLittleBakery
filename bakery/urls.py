@@ -33,8 +33,6 @@ urlpatterns = [
     url(r'^<(?P<pk>\d+)$', views.liked, name='liked'),
 
     url(r'^users$', views.users, name='users'),
-    
-   
-    url(r'^recipe/new/', views.commment, name='comment'),
+    url(r'^recipe/(?P<pk>\d+)/comment/$', views.add_comment_to_recipe, name='add_comment_to_recipe'),
     
 ]
