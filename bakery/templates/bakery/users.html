@@ -2,8 +2,8 @@
 {% load staticfiles %}
 
 {% block content %}
-    {%for u in users%}
-      <a href="{% url 'userProfile' u.username%}">{{u.username}}</a> 
+    {%for us in U %}
+      <a href="{% url 'userProfile' us.username%}">{{us.username}}</a> 
     {%endfor%}
 
 {% endblock %}
